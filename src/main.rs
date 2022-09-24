@@ -51,6 +51,7 @@ fn main() {
         }
         "entry" => {
             let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
+            app.connect_startup(|_| entry::load_css());
             app.connect_open(entry::build_ui);
             app
         }
