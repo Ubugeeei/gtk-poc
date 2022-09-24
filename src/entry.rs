@@ -24,6 +24,10 @@ pub fn build_ui(app: &gtk::Application, _files: &[gtk::gio::File], _blah: &str) 
         println!("Input field changed: {}", input_field.text());
     });
 
+    input_field.connect_activate(move |_| {
+        println!("Enter Key pressed!");
+    });
+
     container.append(&input_field);
 
     window.present();
