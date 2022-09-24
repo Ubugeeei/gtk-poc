@@ -36,6 +36,11 @@ pub fn load_css() {
         r#"
             .input {
                 border-radius: 50px;
+                padding-left: 10px;
+                padding-right: 10px;
+                outline: none;
+                font-size: 15px;
+                color: #888;
             }
     "#
         .as_bytes(),
