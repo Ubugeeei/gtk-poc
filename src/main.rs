@@ -3,6 +3,7 @@ use gtk::prelude::*;
 use gtk::Application;
 
 mod button;
+mod css;
 mod event;
 mod window;
 
@@ -11,6 +12,7 @@ SAMPLE_PJ_NAME:
     - window
     - button
     - event
+    - css
 "#;
 
 fn main() {
@@ -22,10 +24,28 @@ fn main() {
         return;
     }
 
-    let build_ui = match &*args[1] {
-        "window" => window::build_ui,
-        "button" => button::build_ui,
-        "event" => event::build_ui,
+    let app = match &*args[1] {
+        "window" => {
+            let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
+            app.connect_open(window::build_ui);
+            app
+        }
+        "button" => {
+            let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
+            app.connect_open(button::build_ui);
+            app
+        }
+        "event" => {
+            let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
+            app.connect_open(event::build_ui);
+            app
+        }
+        "css" => {
+            let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
+            app.connect_startup(|_| css::load_css());
+            app.connect_open(css::build_ui);
+            app
+        }
         _ => {
             println!("Unknown sample_pj_name: {}", &args[1]);
             println!("{}", SAMPLE_PJ_NAME_HELP);
@@ -33,11 +53,8 @@ fn main() {
         }
     };
 
-    let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
-
     // Connect to "activate" signal of `app`
     // app.connect_activate(build_ui);
-    app.connect_open(build_ui);
 
     // Run the application
     // app.run_with_args(&args);
