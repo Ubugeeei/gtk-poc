@@ -4,6 +4,7 @@ use gtk::Application;
 
 mod button;
 mod css;
+mod entry;
 mod event;
 mod window;
 
@@ -44,6 +45,11 @@ fn main() {
             let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
             app.connect_startup(|_| css::load_css());
             app.connect_open(css::build_ui);
+            app
+        }
+        "entry" => {
+            let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
+            app.connect_open(entry::build_ui);
             app
         }
         _ => {
