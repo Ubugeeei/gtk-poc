@@ -68,10 +68,5 @@ fn main() {
         }
     };
 
-    // Connect to "activate" signal of `app`
-    // app.connect_activate(build_ui);
-
-    // Run the application
-    // app.run_with_args(&args);
     app.run();
 }
