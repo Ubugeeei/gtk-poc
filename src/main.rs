@@ -3,12 +3,14 @@ use gtk::prelude::*;
 use gtk::Application;
 
 mod button;
+mod event;
 mod window;
 
 const SAMPLE_PJ_NAME_HELP: &str = r#"
 SAMPLE_PJ_NAME:
     - window
     - button
+    - event
 "#;
 
 fn main() {
@@ -23,6 +25,7 @@ fn main() {
     let build_ui = match &*args[1] {
         "window" => window::build_ui,
         "button" => button::build_ui,
+        "event" => event::build_ui,
         _ => {
             println!("Unknown sample_pj_name: {}", &args[1]);
             println!("{}", SAMPLE_PJ_NAME_HELP);
