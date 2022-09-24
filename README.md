@@ -7,6 +7,8 @@
 # Usage (macOS)
 
 ```sh
-$ brew install gtk4
+# init
+$ make deps
+
 $ cargo run
 ```
