@@ -6,6 +6,7 @@ mod button;
 mod css;
 mod entry;
 mod event;
+mod text;
 mod window;
 
 const SAMPLE_PJ_NAME_HELP: &str = r#"
@@ -14,6 +15,7 @@ SAMPLE_PJ_NAME:
     - button
     - event
     - css
+    - text
 "#;
 
 fn main() {
@@ -50,6 +52,12 @@ fn main() {
         "entry" => {
             let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
             app.connect_open(entry::build_ui);
+            app
+        }
+        "text" => {
+            let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
+            app.connect_startup(|_| text::load_css());
+            app.connect_open(text::build_ui);
             app
         }
         _ => {
