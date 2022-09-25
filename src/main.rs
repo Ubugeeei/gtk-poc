@@ -8,14 +8,17 @@ mod entry;
 mod event;
 mod text;
 mod window;
+mod icon_btn;
 
 const SAMPLE_PJ_NAME_HELP: &str = r#"
 SAMPLE_PJ_NAME:
     - window
-    - button
-    - event
-    - css
     - text
+    - button
+    - icon_btn
+    - entry
+    - css
+    - event
 "#;
 
 fn main() {
@@ -36,6 +39,12 @@ fn main() {
         "button" => {
             let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
             app.connect_open(button::build_ui);
+            app
+        }
+        "icon_btn" => {
+            let app = Application::new(Some("com.example.App"), ApplicationFlags::HANDLES_OPEN);
+            app.connect_startup(|_| icon_btn::load_css());
+            app.connect_open(icon_btn::build_ui);
             app
         }
         "event" => {
